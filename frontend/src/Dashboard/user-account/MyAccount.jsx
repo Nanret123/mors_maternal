@@ -10,7 +10,7 @@ import Error from "../../components/Error/Error";
 
 const MyAccount = () => {
   const [userData, setUserData] = useState(null);
-  const { dispatch } = useContext(authContext);
+  const { dispatch, user: userContext } = useContext(authContext);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -23,7 +23,7 @@ const MyAccount = () => {
         method: "GET",
         headers: {
           "content-type": "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${userContext.token}`,
         },
       });
 
