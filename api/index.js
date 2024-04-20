@@ -20,10 +20,10 @@ app.use(
     credentials: true,
   })
 );
-app.use('/api/v1/auth', authRoutes);
-app.use('/api/v1/doctors', doctorRoutes);
-app.use('/api/v1/users', userRoutes);
-app.use('/api/v1/reviews', reviewRoutes);
+app.use('/auth', authRoutes);
+app.use('/doctors', doctorRoutes);
+app.use('/users', userRoutes);
+app.use('/reviews', reviewRoutes);
 
 app.get('/', (req, res) => {
   res.send('App is working');
