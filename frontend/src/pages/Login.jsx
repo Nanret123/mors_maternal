@@ -46,7 +46,7 @@ const Login = () => {
 
       setLoading(false);
       toast.success(result.message);
-      navigate("/users/profile/me");
+      navigate("/home");
     } catch (error) {
       toast.error(error.message);
       setLoading(false);
