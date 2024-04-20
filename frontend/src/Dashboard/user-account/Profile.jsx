@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from "react";
-import { BASE_URL, token } from "../../config";
+import { BASE_URL } from "../../config";
 import { toast } from "react-toastify";
 import HashLoader from "react-spinners/HashLoader";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +11,7 @@ const Profile = ({ user }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { dispatch, user: userContext } = useContext(authContext);
+  const { dispatch } = useContext(authContext);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -47,11 +47,12 @@ const Profile = ({ user }) => {
     event.preventDefault();
     setLoading(true);
     try {
+      const token = localStorage.getItem('token');
       const res = await fetch(`${BASE_URL}/users/${user._id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${userContext.token}`,
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(formData),
       });

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BASE_URL, token } from "../../config";
+import { BASE_URL } from "../../config";
 import Loading from "../../components/Loading/Loading";
 import Error from "../../components/Error/Error";
 import Tabs from "./Tabs";
@@ -17,6 +17,7 @@ const Dashboard = () => {
   const getProfile = async () => {
     setLoading(true)
     try {
+      const token = localStorage.getItem('token');
       const res = await fetch(`${BASE_URL}/doctors/profile/me`, {
         method: "GET",
         headers: {

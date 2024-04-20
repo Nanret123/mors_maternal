@@ -1,16 +1,16 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect, useRef } from "react";
 import userImg from "../../assets/images/doctor-img01.png";
 import { authContext } from "../../context/AuthContext";
 import MyBookings from "./MyBookings";
 import Profile from "./Profile";
 import useGetProfile from "../../hooks/useFetchData";
-import { BASE_URL, token } from "../../config";
+import { BASE_URL } from "../../config";
 import Loading from "../../components/Loading/Loading";
 import Error from "../../components/Error/Error";
 
 const MyAccount = () => {
   const [userData, setUserData] = useState(null);
-  const { dispatch, user: userContext } = useContext(authContext);
+  const { dispatch } = useContext(authContext);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -19,11 +19,12 @@ const MyAccount = () => {
   const getProfile = async () => {
     setLoading(true)
     try {
+      const token = localStorage.getItem('token');
       const res = await fetch(`${BASE_URL}/users/profile/me`, {
         method: "GET",
         headers: {
           "content-type": "application/json",
-          Authorization: `Bearer ${userContext.token}`,
+          Authorization: `Bearer ${token}`,
         },
       });
 
